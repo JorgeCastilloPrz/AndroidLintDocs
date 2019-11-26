@@ -98,7 +98,7 @@ companion object {
 
 As you probably noted, the `ISSUE` is directly linked to its corresponding detector through its `implementation` argument.
 
-Then you just need to depend on this `lintchecks` kotlin module from the modules you want those checks to be installed and passed on, like the `app` one in the case of this sample.
+Finally, you just need to depend on this `lintchecks` kotlin module from the modules you want those checks to be installed and passed on, like the `app` one in the case of this sample.
 
 ```groovy
 dependencies {
