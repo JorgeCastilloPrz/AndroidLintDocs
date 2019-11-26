@@ -32,9 +32,11 @@ compileJava {
 }
 
 dependencies {
+    // these two are used to write the custom rules and the registry.
     compileOnly("com.android.tools.lint:lint-api:$androidLintVersion")
     compileOnly("com.android.tools.lint:lint-checks:$androidLintVersion")
 
+    // these are used to write the custom rule tests
     testImplementation "com.android.tools.lint:lint:$androidLintVersion"
     testImplementation "com.android.tools.lint:lint-tests:$androidLintVersion"
     testImplementation "com.android.tools:testutils:$androidLintVersion"
