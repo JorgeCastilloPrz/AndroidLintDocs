@@ -1,0 +1,2 @@
+include ':app', ':lintchecks'
+rootProject.name='My Application'
