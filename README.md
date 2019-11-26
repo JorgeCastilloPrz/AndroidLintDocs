@@ -83,7 +83,7 @@ And that's pretty much it, you're good to go 🎉
 
 For samples on how to write custom Lint rules, look at [the ones provided in this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/tree/master/lintchecks/src/main/java/dev/jorgecastillo/lintchecks).
 
-For more diverse samples you can also take a look at any classes extending `Detector`, there are tons of them that come built into Lint that you can take a look at in your IDE. Those should be available right away.
+For more diverse samples you can also take a look at any classes extending `Detector`, there are tons of them that come built into Lint that you can take a look at in your IDE. Those should be available right away. You can also take a look at them [here](https://android.googlesource.com/platform/tools/base/+/master/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks).
 
 ## How to test custom rules
 
