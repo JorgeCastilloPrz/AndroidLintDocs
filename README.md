@@ -12,8 +12,6 @@ Lint source of knowledge. This is a try to gather all possible knowledge about A
 * Add the following code to the module `build.gradle` file:
 
 ```groovy
-apply plugin: 'kotlin'
-
 jar {
     manifest {
         attributes("Lint-Registry-v2": "dev.jorgecastillo.lintchecks.CustomIssueRegistry")
