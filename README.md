@@ -71,6 +71,8 @@ class CustomIssueRegistry : IssueRegistry() {
 }
 ```
 
+As you can see, custom lint rules are registered through their issues. In other words, you register a list of custom issues that are linked to their corresponding custom lint rules from inside.
+
 Then you just need to depend on this `lintchecks` kotlin module from the modules you want those checks to be installed and passed on, like the `app` one in the case of this sample.
 
 ```groovy
