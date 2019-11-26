@@ -73,6 +73,29 @@ class CustomIssueRegistry : IssueRegistry() {
 
 As you can see, custom lint rules are registered through their issues. In other words, you register a list of custom issues that are linked to their corresponding custom lint rules from inside.
 
+This is an example of one of those rules, that we declare in the `companion object` of their corresponding detector (custom rule). By browsing this project you'll note we always declare them in this way:
+
+```kotlin
+companion object {
+
+    val ISSUE = Issue.create(
+        id = "KotlinAndJavaDirectColorReference",
+        briefDescription = "Direct color reference in code",
+        explanation = "This check forbids any usages of R.color in code (.kt and .java files) since those break " +
+                "multiple theme compatibility. Please use R.attr to ensure the color is themed following the " +
+                "context theme. Use `Context.getColorIntFromAttr(@AttrRes attr: Int): Int` for loading colors by " +
+                "theme attribute.",
+        category = Category.CORRECTNESS,
+        priority = 8,
+        severity = Severity.ERROR,
+        implementation = Implementation(
+            KotlinAndJavaDirectColorReferencesDetector::class.java,
+            Scope.JAVA_FILE_SCOPE
+        )
+    )
+}
+```
+
 Then you just need to depend on this `lintchecks` kotlin module from the modules you want those checks to be installed and passed on, like the `app` one in the case of this sample.
 
 ```groovy
