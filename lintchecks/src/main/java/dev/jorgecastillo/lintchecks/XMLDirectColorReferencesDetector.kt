@@ -1,4 +1,4 @@
-package com.banno.android.lintchecks
+package dev.jorgecastillo.lintchecks
 
 import com.android.SdkConstants.TAG_RESOURCES
 import com.android.SdkConstants.TAG_STYLE

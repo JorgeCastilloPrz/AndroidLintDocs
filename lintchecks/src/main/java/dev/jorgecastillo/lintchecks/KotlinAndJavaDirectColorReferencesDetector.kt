@@ -1,4 +1,4 @@
-package com.banno.android.lintchecks
+package dev.jorgecastillo.lintchecks
 
 import com.android.tools.lint.client.api.UElementHandler
 import com.android.tools.lint.detector.api.Category

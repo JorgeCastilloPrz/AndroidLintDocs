@@ -1,4 +1,4 @@
-package com.banno.android.lintchecks
+package dev.jorgecastillo.lintchecks
 
 import com.android.tools.lint.checks.infrastructure.TestFiles.java
 import com.android.tools.lint.checks.infrastructure.TestFiles.kotlin

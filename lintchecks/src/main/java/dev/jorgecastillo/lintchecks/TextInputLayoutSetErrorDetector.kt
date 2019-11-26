@@ -1,4 +1,4 @@
-package com.banno.android.lintchecks
+package dev.jorgecastillo.lintchecks
 
 import com.android.SdkConstants.CLASS_TEXT_INPUT_LAYOUT
 import com.android.tools.lint.detector.api.Category
