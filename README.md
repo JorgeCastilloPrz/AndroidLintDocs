@@ -78,3 +78,7 @@ dependencies {
 ```
 
 And that's pretty much it, you're good to go 🎉
+
+## How to test custom rules
+
+For samples on how to write tests, take a look at [the ones provided on this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/tree/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks).
