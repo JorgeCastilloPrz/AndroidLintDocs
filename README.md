@@ -101,3 +101,7 @@ For more diverse samples you can also take a look at any classes extending `Dete
 ## How to test custom rules
 
 For samples on how to write tests, take a look at [the ones provided in this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/tree/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks).
+
+## Gotchas
+
+If you are testing calls to a method **in a third party library** (i.e: `material`), tests are not able to resolve sources for those. You'll need to include a stub version of the required class (including a stub version of the called methods) in the test sources for the required scenarios, [the same way we did in this example](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks/TextInputLayoutSetErrorDetectorTest.kt) for calling `TextInputLayout#setError()`.
