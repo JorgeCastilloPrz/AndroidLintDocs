@@ -14,21 +14,10 @@ Lint source of knowledge. This is a try to gather all possible knowledge about A
 ```groovy
 apply plugin: 'kotlin'
 
-test {
-    testLogging {
-        events "passed", "skipped", "failed", "standardOut", "standardError"
-    }
-}
-
 jar {
     manifest {
         attributes("Lint-Registry-v2": "dev.jorgecastillo.lintchecks.CustomIssueRegistry")
     }
-}
-
-compileJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
 }
 
 dependencies {
@@ -40,9 +29,6 @@ dependencies {
     testImplementation "com.android.tools.lint:lint:$androidLintVersion"
     testImplementation "com.android.tools.lint:lint-tests:$androidLintVersion"
     testImplementation "com.android.tools:testutils:$androidLintVersion"
-
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 ```
 
