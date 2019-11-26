@@ -2,7 +2,6 @@ package dev.jorgecastillo.lintchecks
 
 import com.android.tools.lint.client.api.IssueRegistry
 import com.android.tools.lint.detector.api.CURRENT_API
-import com.banno.android.lintchecks.*
 
 /**
  * Required to register the custom lint checks. Look at build.gradle under this module to find how
