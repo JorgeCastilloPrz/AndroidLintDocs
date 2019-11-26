@@ -91,8 +91,6 @@ The arguments here reflect:
 * `severity`: This one decides whether it's gonna be considered a warning or a failure, among other choices.
 * `implementation`: Here is where you link the required detector and decide what file scope you're interested in.
 
-As you probably noted, the `ISSUE` is directly linked to its corresponding detector through its `implementation` argument.
-
 Finally, you just need to depend on this `lintchecks` kotlin module from the modules you want those checks to be installed and passed on, like the `app` one in the case of this sample.
 
 ```groovy
