@@ -82,7 +82,7 @@ companion object {
 }
 ```
 
-The arguments here reflect:
+The arguments are:
 * `id`: That's the id for the check, the one you can use when ignoring occurrences in code (or XML).
 * `briefDescription`: Self explanatory, you'll see this in the IDEA inspections popup.
 * `explanation`: Same thing, more detailed description.
