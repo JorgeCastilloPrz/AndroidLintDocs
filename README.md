@@ -59,7 +59,7 @@ class CustomIssueRegistry : IssueRegistry() {
 
 As you can see, custom lint rules are registered through their issues. In other words, you register a list of custom issues that are linked to their corresponding custom lint rules from inside.
 
-This is an example of one of those rules, that we declare in the `companion object` of their corresponding detector (custom rule). By browsing this project you'll note we always declare them in this way:
+This is an example of one of those issues that we always declare in the `companion object` of their corresponding detector class (custom rule).
 
 ```kotlin
 companion object {
@@ -81,6 +81,15 @@ companion object {
     )
 }
 ```
+
+The arguments here reflect:
+* `id`: That's the id for the check, the one you can use when ignoring occurrences in code (or XML).
+* `briefDescription`: Self explanatory, you'll see this in the IDEA inspections popup.
+* `explanation`: Same thing, more detailed description.
+* `category`: This one states a category for the issue. Categories can be ignored all together.
+* `priority`: You can set a priority value for the issue. Priority can be used to filter warnings or errors, ordering those etc.
+* `severity`: This one decides whether it's gonna be considered a warning or a failure, among other choices.
+* `implementation`: Here is where you link the required detector and decide what file scope you're interested in.
 
 As you probably noted, the `ISSUE` is directly linked to its corresponding detector through its `implementation` argument.
 
