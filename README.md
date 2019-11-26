@@ -30,14 +30,16 @@ dependencies {
 }
 ```
 
-Having `androidLintVersion` declared in main module like:
+You can have `androidLintVersion` declared in main module like:
 ```groovy
 buildscript {
     ext.androidLintVersion = '26.5.2'
 }
 ```
 
-Custom lint rules are registered through the `jar` task above that points to the custom lint rules registry: `dev.jorgecastillo.lintchecks.CustomIssueRegistry`. That's an actual file we've got in the module, where all the custom rules are registered, like:
+Custom lint rules are registered through the `jar` task above that points to the custom lint rules registry using its fully qualified name: `dev.jorgecastillo.lintchecks.CustomIssueRegistry`.
+
+That's an actual file we've got in the module, where all the custom rules are registered, like:
 
 ```kotlin
 class CustomIssueRegistry : IssueRegistry() {
