@@ -15,7 +15,8 @@ Android Lint bible. This is a try to gather all possible knowledge about Android
 ```groovy
 jar {
     manifest {
-        // Registering custom lint checks by pointing to your custom issue registry (you'll find one example below).
+        // Registering custom lint checks by pointing to your custom issue registry
+        // (you'll find one example below).
         attributes("Lint-Registry-v2": "dev.jorgecastillo.lintchecks.CustomIssueRegistry")
     }
 }
