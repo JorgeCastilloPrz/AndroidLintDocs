@@ -95,7 +95,7 @@ Finally, you just need to depend on this `lintchecks` kotlin module from the mod
 
 ```groovy
 dependencies {
-    implementation project(":lintchecks")
+    lintChecks project(":lintchecks")
 }
 ```
 
