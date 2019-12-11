@@ -5,6 +5,7 @@ Android Lint bible. This is a try to gather all possible knowledge about Android
 * Android Lint setup docs.
 * Writing custom rules.
 * Writing tests for custom rules.
+* Gotchas and disclaimers.
 
 ## Setup Lint checks in separate module
 
