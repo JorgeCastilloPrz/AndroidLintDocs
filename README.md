@@ -107,6 +107,16 @@ For samples on how to write custom Lint rules, look at [the ones provided in thi
 
 For more diverse samples you can also take a look at any classes extending `Detector`, there are tons of them that come built into Lint that you can take a look at in your IDE. Those should be available right away. You can also take a look at them [here](https://android.googlesource.com/platform/tools/base/+/master/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks).
 
+### TDD for writing the rules
+
+What has worked **considerably better** for me is to write a rule "skeleton" that does literally nothing when visiting the elements, then write a basic test for it checking for the most basic behavior you'd require from it, then complete the rule implementation gradually adding more tests to cover more cases. This works great given it's quite tedious to test the rules and reproduce the failing scenarios otherwise since it requires running gradle tasks, and the IDE does not always react very fluently.
+
+For samples on how to write those tests, take a look at [the ones provided in this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/tree/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks).
+
+#### ⚠️ Include stubs for the third party dependencies ⚠️
+
+If you are testing calls to a method **in a third party library** (i.e: `material`), tests are not able to resolve sources for those. You'll need to include a stub version of the required class (including a stub version of the called methods) in the test sources for the required scenarios, [the same way we did in this example](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks/TextInputLayoutSetErrorDetectorTest.kt) for calling `TextInputLayout#setError()`, since that's the method calls we're checking with the Lint rule.
+
 ### Cookbook
 
 * Extend both `Detector(), UastScanner` to scan **Java and Kotlin files** ([example](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/c02f23e618fcf5475c13799ef1473ef1984bd54f/lintchecks/src/main/java/dev/jorgecastillo/lintchecks/TextInputLayoutSetErrorDetector.kt#L30)).
@@ -136,14 +146,6 @@ override fun appliesTo(folderType: ResourceFolderType): Boolean {
 ```
 
 [Here you have an example on this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/c02f23e618fcf5475c13799ef1473ef1984bd54f/lintchecks/src/main/java/dev/jorgecastillo/lintchecks/XMLDirectColorReferencesDetector.kt#L25) that mixes both `ResourceXmlDetector` and `BinaryResourceScanner` to check for prefixes in both file names and resource Ids within the files.
-
-## How to test custom rules
-
-For samples on how to write tests, take a look at [the ones provided in this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/tree/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks).
-
-## Gotchas
-
-If you are testing calls to a method **in a third party library** (i.e: `material`), tests are not able to resolve sources for those. You'll need to include a stub version of the required class (including a stub version of the called methods) in the test sources for the required scenarios, [the same way we did in this example](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks/TextInputLayoutSetErrorDetectorTest.kt) for calling `TextInputLayout#setError()`.
 
 ## Writing a library that provides Lint checks
 
