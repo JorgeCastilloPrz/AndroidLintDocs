@@ -8,7 +8,7 @@ test {
 
 jar {
     manifest {
-        attributes("Lint-Registry-v2": "com.foo.bar.MyIssueRegistry")
+        attributes("Lint-Registry-v2": "dev.jorgecastillo.lintchecks.CustomIssueRegistry")
     }
 }
 
@@ -18,13 +18,13 @@ compileJava {
 }
 
 dependencies {
-    compileOnly("com.android.tools.lint:lint-api:$androidLintVersion")
-    compileOnly("com.android.tools.lint:lint-checks:$androidLintVersion")
+    compileOnly "com.android.tools.lint:lint-api:$androidLintVersion"
+    compileOnly "com.android.tools.lint:lint-checks:$androidLintVersion"
 
     testImplementation "com.android.tools.lint:lint:$androidLintVersion"
     testImplementation "com.android.tools.lint:lint-tests:$androidLintVersion"
     testImplementation "com.android.tools:testutils:$androidLintVersion"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

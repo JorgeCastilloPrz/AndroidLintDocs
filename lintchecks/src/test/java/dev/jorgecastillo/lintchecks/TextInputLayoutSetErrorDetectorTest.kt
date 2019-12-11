@@ -210,4 +210,84 @@ class TextInputLayoutSetErrorDetectorTest {
                 """.trimIndent()
             )
     }
+
+    @Test
+    fun `error reference used in when statement does not report in Kotlin`() {
+        lint().files(
+            kotlin(
+                """
+                package test.pkg;
+
+                import android.content.Context
+                import androidx.appcompat.widget.AppCompatTextView
+
+                class CustomTextView : AppCompatTextView {
+
+                    constructor(context: Context) : this(context, null)
+
+                    init {
+                        val error = "Some random failure"
+                        return when (error) {
+                            is String -> {}
+                            else -> {}
+                        }
+                    }
+                }
+                """.trimIndent()
+            )
+        )
+            .issues(TextInputLayoutSetErrorDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
+
+    @Test
+    fun `error reference does not report when just read not assigned`() {
+        lint().files(
+            kotlin(
+                """
+                package com.google.android.material.textfield;
+                
+                import android.content.Context
+                import androidx.appcompat.widget.AppCompatTextView
+                
+                class TextInputLayout : AppCompatTextView {
+                    constructor(context: Context) : this(context, null)
+                    
+                    var error: CharSequence = "Default error"
+                }
+                """.trimIndent()
+            ),
+            kotlin(
+                """
+                package test.pkg;
+
+                import android.content.Context
+                import androidx.appcompat.widget.AppCompatTextView
+                import com.google.android.material.textfield.TextInputLayout
+
+                class CustomTextView : AppCompatTextView {
+
+                    constructor(context: Context) : this(context, null)
+
+                    init {
+                        val input = TextInputLayout(context)
+                        val isErrorEnabled = input.isErrorEnabled()
+                    }
+                    
+                    private fun TextInputLayout.isErrorEnabled(): Boolean {
+                        isErrorEnabled = if (error.isNullOrEmpty()) {
+                            false
+                        } else {
+                            true
+                        }
+                    }
+                }
+                """.trimIndent()
+            )
+        )
+            .issues(TextInputLayoutSetErrorDetector.ISSUE)
+            .run()
+            .expectClean()
+    }
 }

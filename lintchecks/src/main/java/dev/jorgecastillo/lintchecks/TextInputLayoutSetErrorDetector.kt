@@ -15,6 +15,8 @@ import com.intellij.psi.PsiMethod
 import org.jetbrains.uast.UCallExpression
 import org.jetbrains.uast.UExpression
 import org.jetbrains.uast.UReferenceExpression
+import org.jetbrains.uast.kotlin.KotlinUBinaryExpression
+import org.jetbrains.uast.kotlin.KotlinUQualifiedReferenceExpression
 
 /**
  * Lint check that looks for usages of textInput.error = "something" or "textInput.setError("something") given those
@@ -45,7 +47,7 @@ class TextInputLayoutSetErrorDetector : Detector(), UastScanner {
     }
 
     override fun visitReference(context: JavaContext, reference: UReferenceExpression, referenced: PsiElement) {
-        if (isTextInputLayoutProperty(context, referenced as PsiMember)) {
+        if (isTextInputLayoutProperty(context, referenced) && isBeingAssigned(reference)) {
             val name = reference.asSourceString()
             val replace = "setErrorIfChanged()"
 
@@ -66,15 +68,22 @@ class TextInputLayoutSetErrorDetector : Detector(), UastScanner {
     }
 
     /**
+     * @return Whether the property is being assigned or not, to avoid reporting for simple read accesses.
+     */
+    private fun isBeingAssigned(reference: UReferenceExpression): Boolean = reference.uastParent.let { parent ->
+        parent is KotlinUQualifiedReferenceExpression && parent.uastParent is KotlinUBinaryExpression
+    }
+
+    /**
      * @return Whether the property belongs to TextInputLayout. Note that newName() returns the new qualified name for
      * it, which is the material components one. oldName() and defaultName() return the old support design one.
      */
     private fun isTextInputLayoutProperty(
         context: JavaContext,
-        element: PsiMember
+        element: PsiElement
     ): Boolean {
         val evaluator = context.evaluator
-        return evaluator.isMemberInSubClassOf(element, CLASS_TEXT_INPUT_LAYOUT.newName(), false)
+        return element is PsiMember && evaluator.isMemberInSubClassOf(element, CLASS_TEXT_INPUT_LAYOUT.newName(), false)
     }
 
     private fun JavaContext.report(name: String, replace: String, whatToReplace: String, expression: UExpression) {
