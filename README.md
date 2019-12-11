@@ -107,6 +107,36 @@ For samples on how to write custom Lint rules, look at [the ones provided in thi
 
 For more diverse samples you can also take a look at any classes extending `Detector`, there are tons of them that come built into Lint that you can take a look at in your IDE. Those should be available right away. You can also take a look at them [here](https://android.googlesource.com/platform/tools/base/+/master/lint/libs/lint-checks/src/main/java/com/android/tools/lint/checks).
 
+### Cookbook
+
+* Extend both `Detector(), UastScanner` to scan **Java and Kotlin files** ([example](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/c02f23e618fcf5475c13799ef1473ef1984bd54f/lintchecks/src/main/java/dev/jorgecastillo/lintchecks/TextInputLayoutSetErrorDetector.kt#L30)).
+* Extend `ResourceXmlDetector` for scanning XML resources. You can override `appliesTo` method to decide which resource types you're interested in. E.g:
+
+```kotlin
+// Just interested on Layouts.
+@Override
+    public boolean appliesTo(@NonNull ResourceFolderType folderType) {
+        return folderType == ResourceFolderType.LAYOUT;
+    }
+```
+
+* Extend `BinaryResourceScanner` for scanning resource files (not the contents). I.e: you check for prefixes in the name of a bunch of different types of resources. You can constrain the resource types you're interested in. E.g:
+
+```kotlin
+/**
+ * Resources directories that can potentially contain direct color references in any form.
+ */
+override fun appliesTo(folderType: ResourceFolderType): Boolean {
+    return (folderType == ResourceFolderType.LAYOUT ||
+            folderType == ResourceFolderType.MENU ||
+            folderType == ResourceFolderType.DRAWABLE ||
+            folderType == ResourceFolderType.VALUES ||
+            folderType == ResourceFolderType.COLOR)
+}
+``
+
+[Here's an example on this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/c02f23e618fcf5475c13799ef1473ef1984bd54f/lintchecks/src/main/java/dev/jorgecastillo/lintchecks/XMLDirectColorReferencesDetector.kt#L25) that mixes both `ResourceXmlDetector` and `BinaryResourceScanner` to check for prefixes in both file names and resource Ids within the files.
+
 ## How to test custom rules
 
 For samples on how to write tests, take a look at [the ones provided in this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/tree/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks).
