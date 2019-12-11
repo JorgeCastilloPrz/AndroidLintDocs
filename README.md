@@ -1,6 +1,6 @@
 ## Android Lint Docs [![CircleCI](https://circleci.com/gh/JorgeCastilloPrz/AndroidLintDocs/tree/master.svg?style=svg&circle-token=1d8f3ab1c4338786d0382ae5818130c6bab4a461)](https://circleci.com/gh/JorgeCastilloPrz/AndroidLintDocs/tree/master)
 
-Lint source of knowledge. This is a try to gather all possible knowledge about Android Lint in a single place. It covers:
+Android Lint bible. This is a try to gather all possible knowledge about Android Lint in a single place. It covers:
 
 * Android Lint setup docs.
 * Writing custom rules.
