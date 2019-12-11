@@ -114,3 +114,7 @@ For samples on how to write tests, take a look at [the ones provided in this rep
 ## Gotchas
 
 If you are testing calls to a method **in a third party library** (i.e: `material`), tests are not able to resolve sources for those. You'll need to include a stub version of the required class (including a stub version of the called methods) in the test sources for the required scenarios, [the same way we did in this example](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/master/lintchecks/src/test/java/dev/jorgecastillo/lintchecks/TextInputLayoutSetErrorDetectorTest.kt) for calling `TextInputLayout#setError()`.
+
+## Writing a library that provides Lint checks
+
+If you're writing a library where an artifact requires to export lint checks so client projects can get those applied, you must use [lintPublish](https://developer.android.com/studio/build/dependencies#dependency_configurations) so the rules are published into the AAR. That's **required since AGP 3.5.0**.
