@@ -115,9 +115,9 @@ For more diverse samples you can also take a look at any classes extending `Dete
 ```kotlin
 // Just interested on Layouts.
 @Override
-    public boolean appliesTo(@NonNull ResourceFolderType folderType) {
-        return folderType == ResourceFolderType.LAYOUT;
-    }
+public boolean appliesTo(@NonNull ResourceFolderType folderType) {
+    return folderType == ResourceFolderType.LAYOUT;
+}
 ```
 
 * Extend `BinaryResourceScanner` for scanning resource files (not the contents). I.e: you check for prefixes in the name of a bunch of different types of resources. You can constrain the resource types you're interested in. E.g:
@@ -133,9 +133,9 @@ override fun appliesTo(folderType: ResourceFolderType): Boolean {
             folderType == ResourceFolderType.VALUES ||
             folderType == ResourceFolderType.COLOR)
 }
-``
+```
 
-[Here's an example on this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/c02f23e618fcf5475c13799ef1473ef1984bd54f/lintchecks/src/main/java/dev/jorgecastillo/lintchecks/XMLDirectColorReferencesDetector.kt#L25) that mixes both `ResourceXmlDetector` and `BinaryResourceScanner` to check for prefixes in both file names and resource Ids within the files.
+[Here you have an example on this repo](https://github.com/JorgeCastilloPrz/AndroidLintDocs/blob/c02f23e618fcf5475c13799ef1473ef1984bd54f/lintchecks/src/main/java/dev/jorgecastillo/lintchecks/XMLDirectColorReferencesDetector.kt#L25) that mixes both `ResourceXmlDetector` and `BinaryResourceScanner` to check for prefixes in both file names and resource Ids within the files.
 
 ## How to test custom rules
 
